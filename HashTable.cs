@@ -104,6 +104,26 @@ namespace HashTableDS
         }
 
         /// <summary>
+        /// Determines whether this instance contains the object.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>
+        ///   <c>true</c> if [contains] [the specified key]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool Contains(K key)
+        {
+            int index = GetIndex(key);
+            LinkedList<KeyValue<K, V>> list = GetLinkedList(index);
+            foreach (KeyValue<K, V> pair in list)
+            {
+                if (pair.Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
         /// Removes the key value pair for specified key.
         /// </summary>
         /// <param name="key">The key.</param>
