@@ -22,6 +22,7 @@ namespace HashTableDS
         {
             FreqOfWordsInSentence();
             FreqOfWordsInParagraph();
+            RemoveWordsFromMap();
         }
 
         /// <summary>
@@ -55,6 +56,10 @@ namespace HashTableDS
             }
         }
 
+        /// <summary>
+        /// UC2
+        /// Freqs of words in paragraph.
+        /// </summary>
         static void FreqOfWordsInParagraph()
         {
             Console.WriteLine("\n***************************");
@@ -77,6 +82,40 @@ namespace HashTableDS
                 }
             }
 
+            foreach (string word in uniqueWords)
+            {
+                Console.WriteLine("Word: " + word + "\tFrequency: " + wordFreq.Get(word));
+            }
+        }
+
+        /// <summary>
+        /// UC3
+        /// Remove words from map.
+        /// </summary>
+        static void RemoveWordsFromMap()
+        {
+            Console.WriteLine("\n***************************");
+            string paragraph = "Paranoids are not paranoid because they are paranoid but because" +
+                " they keep putting themselves deliberately into paranoid avoidable situations";
+            paragraph = paragraph.ToLower();
+            string[] words = paragraph.Split(" ");
+            LinkedList<string> uniqueWords = new LinkedList<string>();
+            HashTable<string, int> wordFreq = new HashTable<string, int>();
+            foreach (string word in words)
+            {
+                if (!wordFreq.Contains(word))
+                {
+                    wordFreq.Add(word, 1);
+                    uniqueWords.AddLast(word);
+                }
+                else
+                {
+                    wordFreq.Add(word, wordFreq.Get(word) + 1);
+                }
+            }
+
+            wordFreq.Remove("avoidable");
+            Console.WriteLine("After removing avoidable: ");
             foreach (string word in uniqueWords)
             {
                 Console.WriteLine("Word: " + word + "\tFrequency: " + wordFreq.Get(word));
