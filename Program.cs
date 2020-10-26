@@ -4,10 +4,10 @@
 // </copyright>
 // <creator Name="Akshay Poriya "/>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace HashTableDS
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Contains Main Function
@@ -20,13 +20,37 @@ namespace HashTableDS
         /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
-            HashTable<int, int> hashTable = new HashTable<int, int>();
-            hashTable.Add(1, 1);
-            Console.WriteLine("Value at key 1: " + hashTable.Get(1));
-            hashTable.Add(2, 100);
-            Console.WriteLine("Value at key 2: " + hashTable.Get(2));
-            hashTable.Add(1, 50);
-            Console.WriteLine("Value at key 1: " + hashTable.Get(1));
+            FreqOfWordsInSentence();
+        }
+
+        /// <summary>
+        /// UC1
+        /// Freqs the of words in sentence.
+        /// </summary>
+        static void FreqOfWordsInSentence()
+        {
+            string sentence = "To be or not to be";
+            sentence = sentence.ToLower();
+            string[] words = sentence.Split(" ");
+            LinkedList<string> uniqueWords = new LinkedList<string>();
+            HashTable<string, int> wordFreq = new HashTable<string, int>();
+            foreach(string word in words)
+            {
+                if (!wordFreq.Contains(word))
+                {
+                    wordFreq.Add(word, 1);
+                    uniqueWords.AddLast(word);
+                }
+                else
+                {
+                    wordFreq.Add(word, wordFreq.Get(word) + 1);
+                }
+            }
+
+            foreach(string word in uniqueWords)
+            {
+                Console.WriteLine("Word: " + word + "\tFrequency: " + wordFreq.Get(word));
+            }
         }
     }
 }
